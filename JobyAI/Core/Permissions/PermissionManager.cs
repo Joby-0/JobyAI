@@ -102,8 +102,17 @@ public class PermissionManager
 
     public PermissionLevel GetAccessLevel(string path)
     {
-        var permission = _permissions.Permissions.FirstOrDefault(permission => path.Equals(permission.Directory, StringComparison.OrdinalIgnoreCase) ||
-         path.StartsWith(permission.Directory + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase));
+        var permission = _permissions.Permissions
+            .Where(p =>
+                path.Equals(
+                    p.Directory,
+                    StringComparison.OrdinalIgnoreCase)
+                ||
+                path.StartsWith(
+                    p.Directory + Path.DirectorySeparatorChar,
+                    StringComparison.OrdinalIgnoreCase))
+            .OrderByDescending(p => p.Directory.Length)
+            .FirstOrDefault();
 
         return permission?.Level ?? PermissionLevel.None;
     }

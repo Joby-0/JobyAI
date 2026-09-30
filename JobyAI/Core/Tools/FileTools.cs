@@ -26,12 +26,19 @@ public class FileTools
             if (!drive.IsReady)
                 continue;
 
-            // var permission = _permissionManager.GetAccessLevel(drive.RootDirectory.FullName);
+            var root = drive.RootDirectory.FullName;
 
-            // if (permission < PermissionLevel.Read)
-            //     continue;
+            var permission = _permissionManager.GetAccessLevel(root);
 
-            SearchDirectory(drive.RootDirectory.FullName, searchTerm, results);
+            if (permission == PermissionLevel.None)
+            {
+                permission = _permissionManager.AskForAccess(root);
+            }
+
+            if (permission < PermissionLevel.Read)
+                continue;
+
+            SearchDirectory(root, searchTerm, results);
 
             if (results.Count >= 100)
                 break;
@@ -46,11 +53,6 @@ public class FileTools
             return;
 
         var permission = _permissionManager.GetAccessLevel(directory);
-
-        if (permission == PermissionLevel.None)
-        {
-            permission = _permissionManager.AskForAccess(directory);
-        }
 
         if (permission < PermissionLevel.Read)
             return;
