@@ -1,0 +1,65 @@
+```gitignore
+# .NET / Visual Studio
+bin/
+obj/
+.vs/
+.vscode/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build output
+Debug/
+Release/
+x64/
+x86/
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+secrets/
+*.pfx
+
+# Local AI data
+memory/
+conversations/
+experiences/
+
+# Local model/cache files
+models/
+ollama/
+*.gguf
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# IDE
+.idea/
+
+# Test results
+TestResults/
+*.trx
+coverage/
+```
+
+I would **not** commit your agent's personal memory, conversations, or experiences to Git, since those may eventually contain private information.
