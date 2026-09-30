@@ -1,17 +1,17 @@
 using Microsoft.Extensions.AI;
+using Permissions;
 using Tools;
-
-namespace Core;
 
 public class Agent
 {
     private readonly IChatClient _chatClient;
     private readonly FileTools _fileTools;
 
-    public Agent(IChatClient chatClient)
+
+    public Agent(IChatClient chatClient, PermissionManager permissionManager)
     {
         _chatClient = chatClient;
-        _fileTools = new FileTools();
+        _fileTools = new FileTools(permissionManager);
     }
 
     public async Task Run()

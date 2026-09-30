@@ -1,15 +1,14 @@
-﻿using Core;
-using Microsoft.Extensions.AI;
+﻿using Microsoft.Extensions.AI;
 using OllamaSharp;
+using Permissions;
 
 IChatClient chatClient = new OllamaApiClient(new Uri("http://localhost:11434"),"qwen3:8b");
 
 
-chatClient = chatClient
-    .AsBuilder()
-    .UseFunctionInvocation()
-    .Build();
-var agent = new Agent(chatClient);
+chatClient = chatClient.AsBuilder().UseFunctionInvocation().Build();
+var permissionManager = new PermissionManager("Core/Permissions/permissions.json");
+
+var agent = new Agent(chatClient, permissionManager);
 
 
 

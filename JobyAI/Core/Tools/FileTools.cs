@@ -1,9 +1,16 @@
 using System.ComponentModel;
+using Permissions;
 
 namespace Tools;
 
 public class FileTools
 {
+    private readonly PermissionManager _permissionManager;
+
+    public FileTools(PermissionManager permissionManager)
+    {
+        _permissionManager = permissionManager;
+    }
     [Description("Searches the entire computer for files. " + "Use this whenever the user asks to find, locate, search for, or look for a file.")]
     public string[] SearchFiles([Description("The text to search for in file names. " + "Examples: CV, JobySaaS, invoice, photo, report")] string searchTerm)
     {
@@ -19,6 +26,11 @@ public class FileTools
             if (!drive.IsReady)
                 continue;
 
+            // var permission = _permissionManager.GetAccessLevel(drive.RootDirectory.FullName);
+
+            // if (permission < PermissionLevel.Read)
+            //     continue;
+
             SearchDirectory(drive.RootDirectory.FullName, searchTerm, results);
 
             if (results.Count >= 100)
@@ -33,12 +45,21 @@ public class FileTools
         if (results.Count >= 100)
             return;
 
+        var permission = _permissionManager.GetAccessLevel(directory);
+
+        if (permission == PermissionLevel.None)
+        {
+            permission = _permissionManager.AskForAccess(directory);
+        }
+
+        if (permission < PermissionLevel.Read)
+            return;
+
         try
         {
             foreach (var file in Directory.EnumerateFiles(directory))
             {
-                if (Path.GetFileName(file)
-                    .Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                if (Path.GetFileName(file).Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
                 {
                     results.Add(file);
 
@@ -49,22 +70,19 @@ public class FileTools
 
             foreach (var subDirectory in Directory.EnumerateDirectories(directory))
             {
+                SearchDirectory(subDirectory, searchTerm, results);
+
                 if (results.Count >= 100)
                     return;
-
-                SearchDirectory(
-                    subDirectory,
-                    searchTerm,
-                    results);
             }
         }
         catch (UnauthorizedAccessException)
         {
-            // Skip folders Windows doesn't allow us to access.
+            // Skip inaccessible directory.
         }
         catch (IOException)
         {
-            // Skip unavailable drives/folders/files.
+            // Skip unavailable directory.
         }
     }
 }

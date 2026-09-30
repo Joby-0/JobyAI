@@ -42,6 +42,7 @@ secrets/
 memory/
 conversations/
 experiences/
+core/permissions/permissions.json
 
 # Local model/cache files
 models/
