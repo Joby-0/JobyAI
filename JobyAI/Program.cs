@@ -1,10 +1,16 @@
-﻿using Microsoft.Extensions.AI;
+﻿using Core;
+using Microsoft.Extensions.AI;
 using OllamaSharp;
 
-Console.WriteLine("Hello, World!");
+IChatClient chatClient = new OllamaApiClient(new Uri("http://localhost:11434"),"qwen3:8b");
 
-IChatClient chatClient = new OllamaApiClient("http://localhost:11434", "qwen3:8b");
 
-var response = await chatClient.GetResponseAsync("what can u do?");
+chatClient = chatClient
+    .AsBuilder()
+    .UseFunctionInvocation()
+    .Build();
+var agent = new Agent(chatClient);
 
-Console.WriteLine(response.Text);
+
+
+await agent.Run();
