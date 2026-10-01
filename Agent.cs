@@ -34,7 +34,9 @@ public class Agent
                 {
                     Tools =
                     [
-                        AIFunctionFactory.Create(_fileTools.SearchFiles)
+                        AIFunctionFactory.Create(_fileTools.SearchFiles),
+                        AIFunctionFactory.Create(_fileTools.ReadTextFile),
+                        AIFunctionFactory.Create(_fileTools.ReadPdf)
                     ]
                 });
 
