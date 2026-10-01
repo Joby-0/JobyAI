@@ -38,6 +38,8 @@ public class FileTools
             if (permission < PermissionLevel.Read)
                 continue;
 
+
+
             SearchDirectory(root, searchTerm, results);
 
             if (results.Count >= 100)
@@ -53,9 +55,11 @@ public class FileTools
             return;
 
         var permission = _permissionManager.GetAccessLevel(directory);
-
+        Console.WriteLine($"Checking: {directory} | Permission: {permission}");
         if (permission < PermissionLevel.Read)
             return;
+
+
 
         try
         {

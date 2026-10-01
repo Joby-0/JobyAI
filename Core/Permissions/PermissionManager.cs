@@ -104,13 +104,15 @@ public class PermissionManager
     {
         var permission = _permissions.Permissions
             .Where(p =>
-                path.Equals(
+            {
+                var relativePath = Path.GetRelativePath(
                     p.Directory,
-                    StringComparison.OrdinalIgnoreCase)
-                ||
-                path.StartsWith(
-                    p.Directory + Path.DirectorySeparatorChar,
-                    StringComparison.OrdinalIgnoreCase))
+                    path);
+
+                return relativePath == "." ||
+                       (!relativePath.StartsWith("..") &&
+                        !Path.IsPathRooted(relativePath));
+            })
             .OrderByDescending(p => p.Directory.Length)
             .FirstOrDefault();
 
