@@ -6,12 +6,15 @@ public class Agent
 {
     private readonly IChatClient _chatClient;
     private readonly FileTools _fileTools;
+    private readonly ApplicationTools _applicationTools;
+    private readonly SteamTools _steamTools;
 
-
-    public Agent(IChatClient chatClient, PermissionManager permissionManager)
+    public Agent(IChatClient chatClient, PermissionManager permissionManager, SteamTools steamTools)
     {
         _chatClient = chatClient;
         _fileTools = new FileTools(permissionManager);
+        _applicationTools = new ApplicationTools(permissionManager);
+        _steamTools = steamTools;
     }
 
     public async Task Run()
@@ -21,7 +24,13 @@ public class Agent
             AIFunctionFactory.Create(_fileTools.SearchFiles),
             AIFunctionFactory.Create(_fileTools.ReadTextFile),
             AIFunctionFactory.Create(_fileTools.ReadPdf),
-            AIFunctionFactory.Create(_fileTools.OpenFile)
+            AIFunctionFactory.Create(_fileTools.OpenFile),
+
+            AIFunctionFactory.Create(_applicationTools.SearchApplications),
+            AIFunctionFactory.Create(_applicationTools.OpenApplication),
+
+            AIFunctionFactory.Create(_steamTools.SearchSteamGames),
+            AIFunctionFactory.Create(_steamTools.OpenSteamGame)
         };
 
         var messages = new List<ChatMessage>
@@ -72,13 +81,7 @@ public class Agent
                     messages,
                      new ChatOptions
                      {
-                         Tools =
-                            [
-                                AIFunctionFactory.Create(_fileTools.SearchFiles),
-                                AIFunctionFactory.Create(_fileTools.ReadTextFile),
-                                AIFunctionFactory.Create(_fileTools.ReadPdf),
-                                AIFunctionFactory.Create(_fileTools.OpenFile)
-                            ]
+                         Tools = tools
                      });
 
                 messages.AddRange(response.Messages);
