@@ -24,7 +24,11 @@ var steamTools = new SteamTools(httpClient);
 
 var screenTools = new ScreenTools();
 
-var agent = new Agent(chatClient, visionClient, permissionManager, steamTools, screenTools);
+var fileTools = new FileTools(permissionManager);
+
+var applicationTools = new ApplicationTools(permissionManager);
+
+var agent = new Agent(chatClient, visionClient, permissionManager, steamTools, screenTools, fileTools, applicationTools);
 
 
 

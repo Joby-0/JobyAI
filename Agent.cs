@@ -13,13 +13,15 @@ public class Agent
 
     private readonly ScreenTools _screenTools;
 
-    public Agent(IChatClient chatClient, IChatClient visionClient, PermissionManager permissionManager, SteamTools steamTools, ScreenTools screenTools)
+    public Agent(IChatClient chatClient, IChatClient visionClient, PermissionManager permissionManager, SteamTools steamTools, ScreenTools screenTools, FileTools fileTools, ApplicationTools applicationTools)
     {
         _chatClient = chatClient;
         _visionClient = visionClient;
         _permissionManager = permissionManager;
         _steamTools = steamTools;
         _screenTools = screenTools;
+        _fileTools = fileTools;
+        _applicationTools = applicationTools;
     }
 
     public async Task Run()
