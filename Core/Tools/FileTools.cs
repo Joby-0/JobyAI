@@ -56,6 +56,10 @@ public class FileTools
                 if (results.Count >= 100)
                     break;
             }
+            
+        }
+        else if (results.Count != 0)
+        {
             foreach (var drive in DriveInfo.GetDrives())
             {
                 if (!drive.IsReady)
