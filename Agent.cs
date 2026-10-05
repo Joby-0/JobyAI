@@ -9,12 +9,15 @@ public class Agent
     private readonly ApplicationTools _applicationTools;
     private readonly SteamTools _steamTools;
 
-    public Agent(IChatClient chatClient, PermissionManager permissionManager, SteamTools steamTools)
+    private readonly ScreenTools _screenTools;
+
+    public Agent(IChatClient chatClient, PermissionManager permissionManager, SteamTools steamTools, ScreenTools screenTools)
     {
         _chatClient = chatClient;
         _fileTools = new FileTools(permissionManager);
         _applicationTools = new ApplicationTools(permissionManager);
         _steamTools = steamTools;
+        _screenTools = screenTools;
     }
 
     public async Task Run()
@@ -30,7 +33,9 @@ public class Agent
             AIFunctionFactory.Create(_applicationTools.OpenApplication),
 
             AIFunctionFactory.Create(_steamTools.SearchSteamGames),
-            AIFunctionFactory.Create(_steamTools.OpenSteamGame)
+            AIFunctionFactory.Create(_steamTools.OpenSteamGame),
+
+            AIFunctionFactory.Create(_screenTools.TakeScreenshot)
         };
 
         var messages = new List<ChatMessage>

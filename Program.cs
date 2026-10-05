@@ -13,7 +13,9 @@ var httpClient = new HttpClient();
 
 var steamTools = new SteamTools(httpClient);
 
-var agent = new Agent(chatClient, permissionManager,steamTools);
+var screenTools = new ScreenTools();
+
+var agent = new Agent(chatClient, permissionManager,steamTools,screenTools);
 
 
 
