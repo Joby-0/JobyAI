@@ -10,3 +10,4 @@ public class FilePermissions
 {
     public List<FilePermission> Permissions { get; set; } = [];
 }
+
