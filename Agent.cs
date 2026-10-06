@@ -39,7 +39,9 @@ public class Agent
             AIFunctionFactory.Create(_steamTools.SearchSteamGames),
             AIFunctionFactory.Create(_steamTools.OpenSteamGame),
 
-            AIFunctionFactory.Create(_screenTools.TakeScreenshot)
+            AIFunctionFactory.Create(_screenTools.TakeScreenshot),
+            AIFunctionFactory.Create(_screenTools.GetScreenSize),
+            AIFunctionFactory.Create(_screenTools.GetMousePosition)
         };
 
         var messages = new List<ChatMessage>
