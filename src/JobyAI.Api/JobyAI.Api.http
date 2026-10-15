@@ -3,3 +3,10 @@
 ### Check API health
 GET {{baseUrl}}/health
 Accept: application/json
+
+### Open interactive API documentation
+GET {{baseUrl}}/scalar/
+
+### Get the OpenAPI document
+GET {{baseUrl}}/openapi/v1.json
+Accept: application/json

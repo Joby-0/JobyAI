@@ -21,6 +21,9 @@ separate from this new solution.
 dotnet test JobyAI.sln
 ```
 
+When running the API in Development, browse to `/scalar` for interactive API
+documentation or `/openapi/v1.json` for the OpenAPI document.
+
 For the desktop frontend, install dependencies from `src/JobyAI.Desktop` and run
 `npm run build`. Tauri desktop builds additionally require the Rust toolchain and
 platform prerequisites described in the Tauri documentation.
