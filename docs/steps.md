@@ -1,11 +1,11 @@
 Milestone 1 — Repository and environment
-[x] Create the .NET solution and React + TypeScript + Vite app
-[x] Install and verify Ollama on Windows
-[x] Create the initial README, .gitignore and configuration structure
-[x] Add a basic GitHub Actions workflow
+[X] Create the .NET solution and React + TypeScript + Vite app
+[X] Install and verify Ollama on Windows
+[X] Create the initial README, .gitignore and configuration structure
+[X] Add a basic GitHub Actions workflow
 
 Milestone 2 — API and local AI
-[x] Create the ASP.NET Core API and health endpoint
+[X] Create the ASP.NET Core API and health endpoint
 [ ] Add SQLite, EF Core and the first migration
 [ ] Implement IAiProvider and OllamaProvider
 [ ] Create conversations and persist chat messages
