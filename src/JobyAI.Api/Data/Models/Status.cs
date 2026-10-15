@@ -3,8 +3,10 @@ namespace JobyAI.Api.Data.Models;
 public enum Status
 {
     Pending,
-    InProgress,
-    Completed,
+    Approved,
     Rejected,
+    Expired,
+    Executing,
+    Succeeded,
     Failed
 }
