@@ -19,10 +19,12 @@ multi-project application alongside the pre-existing root-level application.
 
 The API scaffold includes a health endpoint, development OpenAPI/Scalar
 documentation, and EF Core SQLite registration. The context and database
-connection are configured, and initial persistence model classes exist, but
-they are not yet mapped through the context or backed by migrations. The desktop
-project is an initial Tauri/Vite/TypeScript
-shell; chat, approval, Gmail, and tool workflows remain on the roadmap.
+connection are configured, with conversation/message, conversation/tool
+execution, and tool execution/approval relationships. Migration files are
+ignored by Git and are not included in GitHub; recreate them locally before
+using EF Core migrations after cloning. The desktop project is an initial
+Tauri/Vite/TypeScript shell; chat, approval, Gmail, and tool workflows remain
+on the roadmap.
 
 See the [implementation roadmap](docs/steps.md) for milestone-by-milestone
 progress and API run instructions.

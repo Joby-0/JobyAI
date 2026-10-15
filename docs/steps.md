@@ -21,8 +21,8 @@ mean that future production hardening or testing is complete.
 - [x] Add built-in OpenAPI generation and interactive Scalar documentation in Development
 - [x] Add the EF Core SQLite provider, `AppDbContext`, and configurable database connection
 - [x] Add initial persistence model class scaffolds
-- [ ] Register and configure persistence entities and relationships in `AppDbContext`
-- [ ] Create and apply the first EF Core migration
+- [x] Register entities and configure conversation, message, tool-execution, and approval relationships
+- [x] Create and apply an initial local EF Core migration (migration files are ignored by Git)
 - [ ] Implement `IAiProvider` and `OllamaProvider`
 - [ ] Create conversations and persist chat messages
 - [ ] Handle missing models, timeouts, and unavailable Ollama
@@ -56,6 +56,7 @@ mean that future production hardening or testing is complete.
 ## Milestone 6 — Quality and release
 
 - [x] Add unit-test and integration-test project scaffolds
+- [x] Verify the initial migration and cascade relationships with an in-memory SQLite integration test
 - [ ] Write meaningful unit tests for tools, permissions, and approval expiry
 - [ ] Write API integration tests using a temporary SQLite database
 - [ ] Test Gmail integration with a dedicated test mailbox
@@ -73,4 +74,12 @@ dotnet run --project src/JobyAI.Api
 In Development, interactive API documentation is at `/scalar` and the OpenAPI
 document is at `/openapi/v1.json`. The default SQLite file is
 `src/JobyAI.Api/Data/jobyai.db` when the API project is used as the content root.
-The database file is local and ignored by Git. Migrations are not yet present.
+The database file is local and ignored by Git. The initial migration is tracked
+locally but is ignored by Git and is not available in a fresh clone. To create
+a local initial migration or regenerate it after cloning, run from the
+repository root:
+
+```powershell
+dotnet ef migrations add InitialCreate --project src/JobyAI.Api --startup-project src/JobyAI.Api --output-dir Data/Migrations
+dotnet ef database update --project src/JobyAI.Api --startup-project src/JobyAI.Api
+```
