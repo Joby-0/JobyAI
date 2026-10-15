@@ -66,6 +66,11 @@ coverage/
 node_modules/
 dist/
 src/JobyAI.Desktop/src-tauri/target/
+
+# Local API database
+src/JobyAI.Api/Data/*.db
+src/JobyAI.Api/Data/*.db-shm
+src/JobyAI.Api/Data/*.db-wal
 ```
 
 I would **not** commit your agent's personal memory, conversations, or experiences to Git, since those may eventually contain private information.

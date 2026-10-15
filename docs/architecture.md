@@ -3,6 +3,7 @@
 ## Projects
 
 - `src/JobyAI.Api` is the ASP.NET Core API and orchestration host.
+- `src/JobyAI.Api/Data` contains the EF Core context and local SQLite database.
 - `src/JobyAI.Contracts` contains types shared across the API and clients.
 - `src/JobyAI.Desktop` is the Tauri 2 desktop shell with a Vite/TypeScript frontend.
 - `tests/JobyAI.UnitTests` and `tests/JobyAI.IntegrationTests` hold automated tests.
@@ -23,6 +24,12 @@ dotnet test JobyAI.sln
 
 When running the API in Development, browse to `/scalar` for interactive API
 documentation or `/openapi/v1.json` for the OpenAPI document.
+
+The API registers `AppDbContext` with SQLite. By default, the database file is
+`src/JobyAI.Api/Data/jobyai.db` when launched with the API project as its content
+root; override the `ConnectionStrings:JobyAI` setting to select another SQLite
+database. The context is ready for application entities; create EF Core
+migrations once the initial data model is defined.
 
 For the desktop frontend, install dependencies from `src/JobyAI.Desktop` and run
 `npm run build`. Tauri desktop builds additionally require the Rust toolchain and
