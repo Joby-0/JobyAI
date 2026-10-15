@@ -1,8 +1,7 @@
 # JobyAI
 
-JobyAI is a personal assistant project. This repository now includes a
-multi-project application scaffold alongside the pre-existing root-level
-application.
+JobyAI is a personal assistant project. This repository includes a new
+multi-project application alongside the pre-existing root-level application.
 
 ## Layout
 
@@ -11,10 +10,36 @@ application.
 - `src/JobyAI.Desktop` — Tauri desktop application and Vite frontend
 - `tests/JobyAI.UnitTests` — unit tests
 - `tests/JobyAI.IntegrationTests` — integration tests
-- `docs` — architecture and security notes
+- `docs/steps.md` — implementation roadmap and current setup instructions
+- `docs/architecture.md` — project structure and architecture
+- `SECURITY.md` — GitHub security policy
+- `docs/security.md` — security design notes
+
+## Project status
+
+The API scaffold includes a health endpoint, development OpenAPI/Scalar
+documentation, and EF Core SQLite registration. The context and database
+connection are configured, and initial persistence model classes exist, but
+they are not yet mapped through the context or backed by migrations. The desktop
+project is an initial Tauri/Vite/TypeScript
+shell; chat, approval, Gmail, and tool workflows remain on the roadmap.
+
+See the [implementation roadmap](docs/steps.md) for milestone-by-milestone
+progress and API run instructions.
+
+## Run the API
+
+```powershell
+dotnet run --project src/JobyAI.Api
+```
+
+In Development, open `/scalar` for interactive API documentation or
+`/openapi/v1.json` for the OpenAPI document.
 
 Build and run the .NET solution tests with:
 
 ```powershell
 dotnet test JobyAI.sln
 ```
+
+For security concerns, follow the reporting instructions in [SECURITY.md](SECURITY.md).
