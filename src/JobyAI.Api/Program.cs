@@ -25,7 +25,7 @@ if (!string.IsNullOrEmpty(databaseDirectory))
     Directory.CreateDirectory(databaseDirectory);
 }
 
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContext<MainDbContext>(options =>
     options.UseSqlite(sqliteConnection.ToString()));
 
 var app = builder.Build();
