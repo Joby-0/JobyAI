@@ -8,4 +8,6 @@ public sealed class ChatMessages
     public string? Role { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+
+    public Conversations Conversation { get; set; } = null!;
 }

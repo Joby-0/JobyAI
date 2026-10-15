@@ -8,4 +8,6 @@ public sealed class PendingApprovals
     public Status Status { get; set; }
     public DateTime ExpiresAt { get; set; }
     public DateTime ApprovedAt { get; set; }
+
+    public ToolExecutions ToolExecution { get; set; } = null!;
 }

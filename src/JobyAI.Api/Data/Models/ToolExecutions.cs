@@ -10,4 +10,7 @@ public sealed class ToolExecutions
     public Status Status { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime CompletedAt { get; set; }
+
+    public Conversations Conversation { get; set; } = null!;
+    public PendingApprovals? PendingApproval { get; set; }
 }
