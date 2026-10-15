@@ -45,7 +45,6 @@ experiences/
 core/permissions/permissions.json
 
 # Local model/cache files
-models/
 ollama/
 *.gguf
 
