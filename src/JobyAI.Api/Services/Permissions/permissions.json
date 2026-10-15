@@ -1,0 +1,16 @@
+{
+  "Permissions": [
+    {
+      "Directory": "C:\\",
+      "Level": 4
+    },
+    {
+      "Directory": "D:\\",
+      "Level": 4
+    },
+    {
+      "Directory": "E:\\",
+      "Level": 4
+    }
+  ]
+}

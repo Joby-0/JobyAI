@@ -61,6 +61,11 @@ temp/
 TestResults/
 *.trx
 coverage/
+
+# JavaScript / Tauri
+node_modules/
+dist/
+src/JobyAI.Desktop/src-tauri/target/
 ```
 
 I would **not** commit your agent's personal memory, conversations, or experiences to Git, since those may eventually contain private information.
