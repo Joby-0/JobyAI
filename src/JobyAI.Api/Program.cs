@@ -1,6 +1,8 @@
+using JobyAI.Api.AI;
 using JobyAI.Api.Data;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using PersonalAssistant.Api.Configuration.Options;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,8 +27,23 @@ if (!string.IsNullOrEmpty(databaseDirectory))
     Directory.CreateDirectory(databaseDirectory);
 }
 
-builder.Services.AddDbContext<MainDbContext>(options =>
-    options.UseSqlite(sqliteConnection.ToString()));
+builder.Services.AddDbContext<MainDbContext>(options => options.UseSqlite(sqliteConnection.ToString()));
+
+builder.Services.AddOptions<AiOptions>().BindConfiguration("AI")
+    .Validate(
+        options => Uri.TryCreate(
+            options.BaseUrl,
+            UriKind.Absolute,
+            out var uri) &&
+            (uri.Scheme == Uri.UriSchemeHttp ||
+             uri.Scheme == Uri.UriSchemeHttps),
+        "AI:BaseUrl must be a valid HTTP or HTTPS URL.")
+    .Validate(
+        options => !string.IsNullOrWhiteSpace(options.Model),
+        "AI:Model is required.")
+    .ValidateOnStart();
+
+builder.Services.AddSingleton<IAiProvider, OllamaProvider>();
 
 var app = builder.Build();
 
