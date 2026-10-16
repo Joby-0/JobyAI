@@ -24,7 +24,7 @@ mean that future production hardening or testing is complete.
 - [x] Add initial persistence model class scaffolds
 - [x] Register entities and configure conversation, message, tool-execution, and approval relationships
 - [x] Create and apply an initial local EF Core migration (migration files are ignored by Git)
-- [ ] Implement `IAiProvider` and `OllamaProvider`
+- [x] Implement `IAiProvider` and `OllamaProvider`
 - [ ] Create conversations and persist chat messages
 - [ ] Handle missing models, timeouts, and unavailable Ollama
 

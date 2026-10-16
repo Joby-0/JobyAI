@@ -13,6 +13,11 @@ public sealed class ChatController : ControllerBase
         _chatService = chatService ?? throw new ArgumentNullException(nameof(chatService));
     }
 
+    /// <summary>
+    /// Sends a chat message to the AI provider and returns the response.
+    /// </summary>
+    /// <param name="message">The chat message to send.</param>
+    /// <returns>The response from the AI provider.</returns>
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] string message)
     {

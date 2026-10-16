@@ -7,7 +7,7 @@ public sealed class MainDbContext(DbContextOptions<MainDbContext> options) : DbC
 {
     public DbSet<AppSettings> AppSettings => Set<AppSettings>();
     public DbSet<Conversations> Conversations => Set<Conversations>();
-    public DbSet<ChatMessages> ChatMessages => Set<ChatMessages>();
+    public DbSet<ChatMessageDB> ChatMessages => Set<ChatMessageDB>();
     public DbSet<ToolExecutions> ToolExecutions => Set<ToolExecutions>();
     public DbSet<PendingApprovals> PendingApprovals => Set<PendingApprovals>();
 
@@ -34,7 +34,7 @@ public sealed class MainDbContext(DbContextOptions<MainDbContext> options) : DbC
                 .OnDelete(DeleteBehavior.Cascade);
         });
 
-        modelBuilder.Entity<ChatMessages>(entity =>
+        modelBuilder.Entity<ChatMessageDB>(entity =>
         {
             entity.HasKey(message => message.Id);
             entity.Property(message => message.Role).HasMaxLength(32);
