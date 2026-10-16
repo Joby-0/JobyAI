@@ -53,7 +53,10 @@ builder.Services.AddChatClient(serviceProvider =>
 
 builder.Services.AddSingleton<IAiProvider, OllamaProvider>();
 builder.Services.AddSingleton<IChatService, ChatService>();
+builder.Services.AddSingleton<IConversationService, ConversationService>();
 
+builder.Services.AddScoped<ChatMessageRepo>();
+builder.Services.AddScoped<ConversationRepo>();
 var app = builder.Build();
 
 app.MapControllers();
