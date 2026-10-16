@@ -1,3 +1,4 @@
+using JobyAI.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobyAI.Api.Controllers;
@@ -6,10 +7,16 @@ namespace JobyAI.Api.Controllers;
 [Route("api/v1/[controller]")]
 public sealed class ChatController : ControllerBase
 {
-    [HttpPost]
-    public IActionResult Post([FromBody] string message)
+    readonly IChatService _chatService;
+    public ChatController(IChatService chatService)
     {
-        // Handle the chat message here
-        return Ok(new { response = $"Received message: {message}" });
+        _chatService = chatService ?? throw new ArgumentNullException(nameof(chatService));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Post([FromBody] string message)
+    {
+        var response = await _chatService.GetResponseAsync(message);
+        return Ok(new { response });
     }
 }

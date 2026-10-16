@@ -1,7 +1,11 @@
 using JobyAI.Api.AI;
 using JobyAI.Api.Data;
+using JobyAI.Api.Services;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.AI;
+using Microsoft.Extensions.Options;
+using OllamaSharp;
 using PersonalAssistant.Api.Configuration.Options;
 using Scalar.AspNetCore;
 
@@ -31,19 +35,21 @@ builder.Services.AddDbContext<MainDbContext>(options => options.UseSqlite(sqlite
 
 builder.Services.AddOptions<AiOptions>().BindConfiguration("AI")
     .Validate(
-        options => Uri.TryCreate(
-            options.BaseUrl,
-            UriKind.Absolute,
-            out var uri) &&
-            (uri.Scheme == Uri.UriSchemeHttp ||
-             uri.Scheme == Uri.UriSchemeHttps),
-        "AI:BaseUrl must be a valid HTTP or HTTPS URL.")
-    .Validate(
-        options => !string.IsNullOrWhiteSpace(options.Model),
-        "AI:Model is required.")
+        options => Uri.TryCreate(options.BaseUrl, UriKind.Absolute, out var uri) && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps), "AI:BaseUrl must be a valid HTTP or HTTPS URL.")
+    .Validate(options => !string.IsNullOrWhiteSpace(options.Model), "AI:Model is required.")
     .ValidateOnStart();
 
+builder.Services.AddChatClient(serviceProvider =>
+{
+    var options = serviceProvider
+        .GetRequiredService<IOptions<AiOptions>>()
+        .Value;
+
+    return new OllamaApiClient(new Uri(options.BaseUrl),options.Model);
+});
+
 builder.Services.AddSingleton<IAiProvider, OllamaProvider>();
+builder.Services.AddSingleton<IChatService, ChatService>();
 
 var app = builder.Build();
 
