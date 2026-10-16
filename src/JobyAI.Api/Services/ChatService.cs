@@ -30,6 +30,7 @@ public sealed class ChatService : IChatService
 
 
         var response = await _aiProvider.GetResponseAsync(chatMessages, cancellationToken: cancellationToken);
+        await _chatMessageRepo.SaveAsync(new ChatMessage(ChatRole.Assistant, response.Text), conversationId ?? Guid.NewGuid(), cancellationToken);
         return response.Text;
     }
 }
