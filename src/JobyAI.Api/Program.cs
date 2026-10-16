@@ -35,6 +35,8 @@ if (!string.IsNullOrEmpty(databaseDirectory))
 builder.Services.AddDbContext<MainDbContext>(options => options.UseSqlite(sqliteConnection.ToString()));
 builder.Services.AddScoped<ConversationRepo>();
 builder.Services.AddScoped<IConversationService, ConversationService>();
+builder.Services.AddScoped<ChatMessageRepo>();
+builder.Services.AddScoped<IChatService, ChatService>();
 
 builder.Services.AddOptions<AiOptions>().BindConfiguration("AI")
     .Validate(
@@ -52,11 +54,6 @@ builder.Services.AddChatClient(serviceProvider =>
 });
 
 builder.Services.AddSingleton<IAiProvider, OllamaProvider>();
-builder.Services.AddSingleton<IChatService, ChatService>();
-builder.Services.AddSingleton<IConversationService, ConversationService>();
-
-builder.Services.AddScoped<ChatMessageRepo>();
-builder.Services.AddScoped<ConversationRepo>();
 var app = builder.Build();
 
 app.MapControllers();
