@@ -5,5 +5,5 @@ namespace JobyAI.Api.AI;
 
 public interface IAiProvider
 {
-    Task<ChatResponse> GetResponseAsync(IEnumerable<ChatMessages> messages, ChatOptions? options = null, CancellationToken cancellationToken = default);
+    Task<ChatResponse> GetResponseAsync(IEnumerable<ChatMessage> messages, ChatOptions? options = null, CancellationToken cancellationToken = default);
 }

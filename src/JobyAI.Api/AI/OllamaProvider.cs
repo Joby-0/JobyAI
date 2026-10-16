@@ -5,8 +5,14 @@ namespace JobyAI.Api.AI;
 
 public sealed class OllamaProvider : IAiProvider
 {
-    public Task<ChatResponse> GetResponseAsync(IEnumerable<ChatMessages> messages, ChatOptions? options = null, CancellationToken cancellationToken = default)
+    private readonly IChatClient _chatClient;
+
+    public OllamaProvider(IChatClient chatClient)
     {
-        throw new NotImplementedException();
+        _chatClient = chatClient ?? throw new ArgumentNullException(nameof(chatClient));
+    }
+    public Task<ChatResponse> GetResponseAsync(IEnumerable<ChatMessage> messages, ChatOptions? options = null, CancellationToken cancellationToken = default)
+    {
+        return _chatClient.GetResponseAsync(messages, options, cancellationToken);
     }
 }
