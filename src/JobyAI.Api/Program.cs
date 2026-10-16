@@ -1,5 +1,6 @@
 using JobyAI.Api.AI;
 using JobyAI.Api.Data;
+using JobyAI.Api.Data.Repos;
 using JobyAI.Api.Services;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,8 @@ if (!string.IsNullOrEmpty(databaseDirectory))
 }
 
 builder.Services.AddDbContext<MainDbContext>(options => options.UseSqlite(sqliteConnection.ToString()));
+builder.Services.AddScoped<ConversationRepo>();
+builder.Services.AddScoped<IConversationService, ConversationService>();
 
 builder.Services.AddOptions<AiOptions>().BindConfiguration("AI")
     .Validate(

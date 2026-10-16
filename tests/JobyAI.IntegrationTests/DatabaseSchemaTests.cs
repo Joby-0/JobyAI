@@ -36,7 +36,7 @@ public sealed class DatabaseSchemaTests
         };
 
         context.Conversations.Add(conversation);
-        context.ChatMessages.Add(new ChatMessages
+        context.ChatMessages.Add(new ChatMessageDB
         {
             Id = Guid.NewGuid(),
             ConversationId = conversation.Id,

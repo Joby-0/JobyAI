@@ -25,6 +25,7 @@ mean that future production hardening or testing is complete.
 - [x] Register entities and configure conversation, message, tool-execution, and approval relationships
 - [x] Create and apply an initial local EF Core migration (migration files are ignored by Git)
 - [x] Implement `IAiProvider` and `OllamaProvider`
+- [x] Implement conversation list, detail, and delete endpoints
 - [ ] Create conversations and persist chat messages
 - [ ] Handle missing models, timeouts, and unavailable Ollama
 
@@ -75,6 +76,8 @@ dotnet run --project src/JobyAI.Api
 In Development, interactive API documentation is at `/scalar` and the OpenAPI
 document is at `/openapi/v1.json`. The default SQLite file is
 `src/JobyAI.Api/Data/jobyai.db` when the API project is used as the content root.
+Conversation list, detail, and delete operations are available at
+`/api/v1/conversations`.
 The database file is local and ignored by Git. The initial migration is tracked
 locally but is ignored by Git and is not available in a fresh clone. To create
 a local initial migration or regenerate it after cloning, run from the

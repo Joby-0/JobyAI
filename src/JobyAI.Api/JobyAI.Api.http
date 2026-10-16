@@ -10,3 +10,14 @@ GET {{baseUrl}}/scalar/
 ### Get the OpenAPI document
 GET {{baseUrl}}/openapi/v1.json
 Accept: application/json
+
+### List conversations
+GET {{baseUrl}}/api/v1/conversations
+Accept: application/json
+
+### Get a conversation and its messages
+GET {{baseUrl}}/api/v1/conversations/00000000-0000-0000-0000-000000000001
+Accept: application/json
+
+### Delete a conversation and its messages
+DELETE {{baseUrl}}/api/v1/conversations/00000000-0000-0000-0000-000000000001
