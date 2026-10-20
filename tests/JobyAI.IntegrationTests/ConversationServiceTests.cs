@@ -44,7 +44,7 @@ public sealed class ConversationServiceTests
                 ConversationId = conversation.Id,
                 Role = "assistant",
                 Content = "Reply",
-                CreatedAt = DateTimeOffset.Parse("2026-01-02T00:00:02Z")
+                CreatedAt = DateTimeOffset.Parse("2026-01-02T00:00:02Z").UtcDateTime
             },
             new ChatMessageDB
             {
@@ -52,7 +52,7 @@ public sealed class ConversationServiceTests
                 ConversationId = conversation.Id,
                 Role = "user",
                 Content = "Hello",
-                CreatedAt = DateTimeOffset.Parse("2026-01-02T00:00:01Z")
+                CreatedAt = DateTimeOffset.Parse("2026-01-02T00:00:01Z").UtcDateTime
             });
         await context.SaveChangesAsync();
 

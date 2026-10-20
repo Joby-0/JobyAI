@@ -51,8 +51,8 @@ public sealed class ChatMessageRepo
             ConversationId = conversationId,
             Content = message.Text ?? string.Empty,
             Role = message.Role.Value,
-            CreatedAt = message.CreatedAt ?? DateTimeOffset.UtcNow,
-            UpdatedAt = DateTimeOffset.UtcNow
+            CreatedAt = message.CreatedAt?.UtcDateTime ?? DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
         };
     }
 }

@@ -20,6 +20,17 @@ public sealed class ConversationRepo
             .ThenByDescending(conversation => conversation.CreatedAt)
             .ToListAsync(cancellationToken);
     }
+    public async Task<Conversations> CreateAsync(Conversations conversation, CancellationToken cancellationToken = default)
+    {
+        if (conversation is null)
+        {
+            throw new ArgumentNullException(nameof(conversation));
+        }
+
+        _dbContext.Conversations.Add(conversation);
+        await _dbContext.SaveChangesAsync(cancellationToken);
+        return conversation;
+    }
 
     public Task<Conversations?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {

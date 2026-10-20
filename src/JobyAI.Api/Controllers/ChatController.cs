@@ -19,9 +19,9 @@ public sealed class ChatController : ControllerBase
     /// <param name="message">The chat message to send.</param>
     /// <returns>The response from the AI provider.</returns>
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] string message)
+    public async Task<IActionResult> Post([FromBody] string message, [FromQuery] Guid? conversationId = null, CancellationToken cancellationToken = default)
     {
-        var response = await _chatService.GetResponseAsync(message);
+        var response = await _chatService.GetResponseAsync(message, conversationId, cancellationToken: cancellationToken);
         return Ok(new { response });
     }
 }

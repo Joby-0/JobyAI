@@ -70,7 +70,7 @@ src/JobyAI.Desktop/src-tauri/target/
 src/JobyAI.Api/Data/*.db
 src/JobyAI.Api/Data/*.db-shm
 src/JobyAI.Api/Data/*.db-wal
-src/JobyAI.Api/Data/Migrations/
-```
+src/JobyAI.Api/Data/migrations/
+
 
 I would **not** commit your agent's personal memory, conversations, or experiences to Git, since those may eventually contain private information.

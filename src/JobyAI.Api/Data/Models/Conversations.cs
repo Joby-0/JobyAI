@@ -9,4 +9,11 @@ public sealed class Conversations
 
     public ICollection<ChatMessageDB> Messages { get; set; } = new List<ChatMessageDB>();
     public ICollection<ToolExecutions> ToolExecutions { get; set; } = new List<ToolExecutions>();
+
+    public Conversations()
+    {
+        Id = Guid.NewGuid();
+        CreatedAt = DateTime.UtcNow;
+        UpdatedAt = DateTime.UtcNow;
+    }
 }
