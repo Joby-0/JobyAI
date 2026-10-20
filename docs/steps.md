@@ -27,7 +27,7 @@ mean that future production hardening or testing is complete.
 - [x] Implement `IAiProvider` and `OllamaProvider`
 - [x] Implement conversation list, detail, and delete endpoints
 - [x] Create conversations and persist chat messages
-- [ ] Handle missing models, timeouts, and unavailable Ollama
+- [x] Handle missing models, timeouts, and unavailable Ollama
 
 ## Milestone 3 — Tool system and file access
 
