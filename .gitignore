@@ -38,11 +38,6 @@ Desktop.ini
 secrets/
 *.pfx
 
-# Local AI data
-memory/
-conversations/
-experiences/
-core/permissions/permissions.json
 
 # Local model/cache files
 ollama/
