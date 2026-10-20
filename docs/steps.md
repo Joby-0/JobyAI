@@ -26,7 +26,7 @@ mean that future production hardening or testing is complete.
 - [x] Create and apply an initial local EF Core migration (migration files are ignored by Git)
 - [x] Implement `IAiProvider` and `OllamaProvider`
 - [x] Implement conversation list, detail, and delete endpoints
-- [ ] Create conversations and persist chat messages
+- [x] Create conversations and persist chat messages
 - [ ] Handle missing models, timeouts, and unavailable Ollama
 
 ## Milestone 3 — Tool system and file access
