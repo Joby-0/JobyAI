@@ -31,7 +31,7 @@ mean that future production hardening or testing is complete.
 
 ## Milestone 3 — Tool system and file access
 
-- [x] Add initial tool, agent, and security source folders and interface scaffolds
+- [] Add initial tool, agent, and security source folders and interface scaffolds
 - [ ] Define the complete assistant-tool contract and implement the tool registry
 - [ ] Add strict tool input schemas and validation
 - [ ] Implement approved-folder search and safe file reading
