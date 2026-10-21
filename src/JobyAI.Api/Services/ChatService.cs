@@ -40,6 +40,9 @@ public sealed class ChatService : IChatService
 
         var userMessage = new ChatMessage(ChatRole.User, message);
 
+        //start the loop in agent orchestrator to process the message and get the response
+
+        //move this to agent orchestrator
         await _chatMessageRepo.SaveAsync(userMessage, conversationId.Value, cancellationToken);
 
         chatMessages.Add(userMessage);
