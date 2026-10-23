@@ -1,3 +1,5 @@
+using PersonalAssistant.Api.Tools;
+
 namespace JobyAI.Api.Agent;
 
 public sealed class ToolRegistry : IToolRegistry
