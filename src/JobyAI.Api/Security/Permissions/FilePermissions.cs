@@ -1,4 +1,4 @@
-namespace Permissions;
+namespace JobyAI.Api.Security.Permissions;
 
 public class FilePermission
 {

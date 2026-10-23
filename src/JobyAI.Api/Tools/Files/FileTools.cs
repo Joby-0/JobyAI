@@ -1,12 +1,12 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
-using Permissions;
+using JobyAI.Api.Security.Permissions;
 using UglyToad.PdfPig;
 
-namespace Tools;
+namespace JobyAI.Api.Tools;
 
-public class FileTools
+public class FileTools 
 {
     private readonly PermissionManager _permissionManager;
 

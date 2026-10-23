@@ -5,6 +5,7 @@ using JobyAI.Api.Configuration.Options;
 using JobyAI.Api.Data;
 using JobyAI.Api.Data.Repos;
 using JobyAI.Api.Services;
+using JobyAI.Api.Tools;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.AI;
@@ -45,6 +46,15 @@ builder.Services.AddScoped<IConversationService, ConversationService>();
 builder.Services.AddScoped<ChatMessageRepo>();
 builder.Services.AddScoped<IChatService, ChatService>();
 builder.Services.AddScoped<IToolRegistry, ToolRegistry>();
+
+//tools
+builder.Services.AddScoped<IAssistantTool, SearchFilesTool>();
+// builder.Services.AddScoped<IAssistantTool, ReadTextFileTool>();
+// builder.Services.AddScoped<IAssistantTool, ReadPdfTool>();
+// builder.Services.AddScoped<IAssistantTool, OpenFileTool>();
+
+builder.Services.AddScoped<IToolRegistry, ToolRegistry>();
+
 
 builder.Services.AddOptions<AiOptions>().BindConfiguration("AI")
     .Validate(

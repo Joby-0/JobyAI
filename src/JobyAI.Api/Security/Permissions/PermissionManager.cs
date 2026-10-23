@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Permissions;
+namespace JobyAI.Api.Security.Permissions;
 
 public class PermissionManager
 {
