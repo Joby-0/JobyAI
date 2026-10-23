@@ -1,7 +1,5 @@
 using System.Text.Json;
-using OllamaSharp.Tools;
-
-namespace PersonalAssistant.Api.Tools;
+namespace JobyAI.Api.Tools;
 
 public interface IAssistantTool
 {

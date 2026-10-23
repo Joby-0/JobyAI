@@ -1,6 +1,5 @@
 using System.Text.Json;
 using Microsoft.Extensions.AI;
-using PersonalAssistant.Api.Tools;
 
 namespace JobyAI.Api.Tools;
 
