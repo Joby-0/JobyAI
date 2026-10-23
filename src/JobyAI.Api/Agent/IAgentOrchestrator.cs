@@ -1,3 +1,4 @@
+using JobyAI.Contracts.Chat;
 using Microsoft.Extensions.AI;
 
 namespace JobyAI.Api.Agent;

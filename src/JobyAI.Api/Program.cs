@@ -1,4 +1,6 @@
+using System.Text.Json.Serialization;
 using JobyAI.Api.AI;
+using JobyAI.Api.Configuration.Options;
 using JobyAI.Api.Data;
 using JobyAI.Api.Data.Repos;
 using JobyAI.Api.Services;
@@ -7,11 +9,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Options;
 using OllamaSharp;
-using PersonalAssistant.Api.Configuration.Options;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(
+            new JsonStringEnumConverter());
+    });
 builder.Services.AddOpenApi();
 
 var connectionString = builder.Configuration.GetConnectionString("JobyAI")
