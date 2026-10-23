@@ -2,6 +2,7 @@ using System.Text.Json;
 using JobyAI.Api.AI;
 using JobyAI.Api.Tools;
 using JobyAI.Contracts.Chat;
+using JobyAI.Contracts.Tools;
 using Microsoft.Extensions.AI;
 
 namespace JobyAI.Api.Agent;
@@ -125,8 +126,7 @@ public sealed class AgentOrchestrator : IAgentOrchestrator
             // 7. A sensitive action pauses for user approval.
             if (decision.Action == PermissionAction.RequiresApproval)
             {
-                var approvalId =
-                    await _approvalService.CreatePendingAsync(
+                var approvalId = await _approvalService.CreatePendingAsync(
                         conversationId,
                         tool.Name,
                         toolCall.CallId,
@@ -134,10 +134,7 @@ public sealed class AgentOrchestrator : IAgentOrchestrator
                         messages,
                         cancellationToken);
 
-                return AgentTurnResult.WaitingForApproval(
-                    conversationId,
-                    approvalId,
-                    $"I need your approval before using {tool.Name}.");
+                return AgentTurnResult.WaitingForApproval(conversationId, approvalId, $"I need your approval before using {tool.Name}.");
             }
 
             // 8. Execute the approved-by-policy tool.
@@ -151,17 +148,13 @@ public sealed class AgentOrchestrator : IAgentOrchestrator
                         conversationId),
                     cancellationToken);
             }
-            catch (OperationCanceledException)
-                when (cancellationToken.IsCancellationRequested)
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
             {
                 throw;
             }
             catch (Exception ex)
             {
-                _logger.LogError(
-                    ex,
-                    "Tool {ToolName} failed.",
-                    tool.Name);
+                _logger.LogError(ex, "Tool {ToolName} failed.", tool.Name);
 
                 result = new ToolResult(false, "The tool failed to execute.");
             }
@@ -169,8 +162,7 @@ public sealed class AgentOrchestrator : IAgentOrchestrator
             // TODO: Persist the ToolExecution and its actual outcome.
 
             // 9. Feed the result back to the model.
-            AddToolResult(
-                messages,
+            AddToolResult(messages, 
                 toolCall.CallId,
                 new
                 {

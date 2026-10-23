@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using JobyAI.Api.Agent;
 using JobyAI.Api.AI;
 using JobyAI.Api.Configuration.Options;
 using JobyAI.Api.Data;
@@ -43,6 +44,7 @@ builder.Services.AddScoped<ConversationRepo>();
 builder.Services.AddScoped<IConversationService, ConversationService>();
 builder.Services.AddScoped<ChatMessageRepo>();
 builder.Services.AddScoped<IChatService, ChatService>();
+builder.Services.AddScoped<IToolRegistry, ToolRegistry>();
 
 builder.Services.AddOptions<AiOptions>().BindConfiguration("AI")
     .Validate(
